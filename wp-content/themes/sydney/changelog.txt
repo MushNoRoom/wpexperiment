@@ -1,0 +1,12 @@
+Changelog
+
+3 May 2015 - 1.05
+--------------------------------------
+- minor CSS fix.
+
+1 May 2015 - 1.04
+--------------------------------------
+- updated TGM Plugin Activation to the latest version;
+- social menu links now open in a new tab;
+- removed duplicate license info for imagesLoaded;
+- fixed issue in Safari.
