@@ -38,7 +38,7 @@ get_header(); ?>
 			<?php get_template_part( 'content', 'none' ); ?>
 
 		<?php endif; ?>
-
+        <?php dynamic_sidebar('mainWigetRow-1') ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 

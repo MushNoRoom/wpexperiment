@@ -21,7 +21,7 @@
 
 	<div id="sidebar-footer" class="footer-widgets widget-area" role="complementary">
 		<div class="container">
-			<?php if ( is_active_sidebar( 'footer-1' ) ) : ?>
+ 			<?php if ( is_active_sidebar( 'footer-1' ) ) : ?>
 				<div class="sidebar-column <?php echo $cols; ?>">
 					<?php dynamic_sidebar( 'footer-1'); ?>
 				</div>
@@ -40,6 +40,6 @@
 				<div class="sidebar-column <?php echo $cols; ?>">
 					<?php dynamic_sidebar( 'footer-4'); ?>
 				</div>
-			<?php endif; ?>	
+			<?php endif; ?>
 		</div>	
 	</div>

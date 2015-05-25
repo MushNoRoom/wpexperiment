@@ -3010,3 +3010,20 @@ Panels
 			width: 100%;
 		}
 	}
+/* Custom Widgets
+-------------------------------------------------------------- */
+	.front-paget-widget-area {
+		width:30%;
+		position: relative;
+		float: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.front-page-issue-select-area {
+		width:30%;
+		position: relative;
+		float: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+

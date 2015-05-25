@@ -524,10 +524,66 @@ function sydney_customize_register( $wp_customize ) {
         array(
             'label' => __( 'Text for your call to action button', 'sydney' ),
             'section' => 'sydney_slider',
-            'type' => 'text',
+            'type'           => 'radio',
+            'choices'        => array(
+                'dark'   => __( 'Dark' ),
+                'light'  => __( 'Light' )
+                ),
             'priority' => 32
         )
-    );         
+    );
+
+    $wp_customize->add_setting('sydney_options[info]', array(
+            'type'              => 'info_control',
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => 'esc_attr',            
+        )
+    );
+
+    $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'dropdown', array(
+        'label' => __('Call to action button', 'sydney'),
+        'section' => 'sydney_slider',
+        'settings' => 'sydney_options[info]',
+        'priority' => 30
+        ) )
+    );     
+    $wp_customize->add_setting(
+        'slider_button_url',
+        array(
+            'default' => '#primary',
+            'sanitize_callback' => 'esc_url_raw',
+        )
+    );
+    $wp_customize->add_control(
+        'slider_button_url',
+        array(
+            'label' => __( 'URL for your call to action button', 'sydney' ),
+            'section' => 'sydney_slider',
+            'type' => 'text',
+            'priority' => 31
+        )
+    );
+    $wp_customize->add_setting(
+        'slider_button_text',
+        array(
+            'default' => __('Click to begin','sydney'),
+            'sanitize_callback' => 'sydney_sanitize_text',
+        )
+    );
+    $wp_customize->add_control(
+        'slider_button_text',
+        array(
+            'label' => __( 'Text for your call to action button', 'sydney' ),
+            'section' => 'sydney_slider',
+            'type'           => 'radio',
+            'choices'        => array(
+                'dark'   => __( 'Dark' ),
+                'light'  => __( 'Light' )
+                ),
+            'priority' => 32
+        )
+    ); 
+
     //___Menu style___//
     $wp_customize->add_section(
         'sydney_menu_style',

@@ -97,6 +97,22 @@ function sydney_widgets_init() {
 		'after_title'   => '</h3>',
 	) );
 
+	register_sidebar( array(
+		'name'          => 'BrandSelectWidget',
+		'id'            => 'mywidgetarea-1',
+		'description'   => '',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+	) );
+
+	register_sidebar( array(
+		'name'          => 'IssueSelectWidget',
+		'id'            => 'mywidgetarea-2',
+		'description'   => '',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+	) );
+
 	//Footer widget areas
 	$widget_areas = get_theme_mod('footer_widget_areas', '3');
 	for ($i=1; $i<=$widget_areas; $i++) {
