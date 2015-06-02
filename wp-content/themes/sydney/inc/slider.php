@@ -59,14 +59,22 @@ function sydney_slider_template() {
             <?php if ($slider_button) : ?>
                 <a href="<?php echo esc_url(get_theme_mod('slider_button_url','#primary')); ?>" class="roll-button button-slider"><?php echo esc_html($slider_button); ?></a>
             <?php endif; ?> -->
+
             <div class="custom-widget-content clearfix">
+                     <?php
+                        $brandDB = new wpdb('root', '35941876', 'yixiuge1', 'localhost');
+                        $brandDB->show_errors();
+                        $brandList = $brandDB->get_results('SELECT * FROM yxgphonebrands');
+                     ?>
                 <form class="form-inline" action="action_page.php">
                     <select name="请选择品牌">
-                        <option value="sony" selected>请选择手机品牌</option>
-                        <option value="sony">索尼</option>
-                        <option value="samsung">三星</option>
-                        <option value="apple">苹果</option>
-                        <option value="htc">HTC</option>
+                        <option value="xuanze" selected>请选择手机品牌</option>
+                        <?php 
+                            foreach ($brandList as $key => $brand) {
+                                $brandName = $brand->BrandName;
+                                echo '<option value="'.$brandName.'">'.$brandName."</option>\n";
+                            }
+                        ?>
                     </select>
                     <select name="请选择故障">
                         <option value="sony" selected>请选择故障类别</option>
