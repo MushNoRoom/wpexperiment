@@ -1,3 +1,18 @@
+<?php 
+function updateModelList ($dbConnection) {
+    if(isset($_POST["select_brand"])){
+        $selectedBrandsId = $_POST["select_brand"];
+        echo "select brand $selectedBrandsId";
+        $modelList = $dbConnection->get_results("select * from yxgphonemodels where BrandID=".$selectedBrandsId);
+        foreach ($modelList as $key => $model) {
+            $modelDisplayName = $model->ModelDisplayName;
+            $modelId = $model->ID;
+            echo '<option value="'.$modelId.'">'.$modelDisplayName."</option>\n";
+        }
+    }
+}
+?>
+
 <?php
 /**
  * Slider template
@@ -66,18 +81,25 @@ function sydney_slider_template() {
                         $brandDB->show_errors();
                         $brandList = $brandDB->get_results('SELECT * FROM yxgphonebrands');
                      ?>
-                <form class="form-inline" action="action_page.php">
-                    <select name="请选择品牌">
-                        <option value="xuanze" selected>请选择手机品牌</option>
+                <form name="issue-select-form" class="form-inline" action="" method="post">
+                    <select name="select_brand">
+                        <option value="-1" selected>请选择手机品牌</option>
                         <?php 
                             foreach ($brandList as $key => $brand) {
                                 $brandName = $brand->BrandName;
-                                echo '<option value="'.$brandName.'">'.$brandName."</option>\n";
+                                $brandId = $brand->ID;
+                                echo '<option value="'.$brandId.'">'.$brandName."</option>\n";
                             }
                         ?>
                     </select>
+                    <select name="select model">
+                        <option value="mdoel" selected>请选择手机型号</option>
+                        <?php 
+                            updateModelList($brandDB);
+                        ?>
+                    </select>
                     <select name="请选择故障">
-                        <option value="sony" selected>请选择故障类别</option>
+                        <option value="故障类别" selected>请选择故障类别</option>
                         <option value="screen">屏幕</option>
                         <option value="battery">电池</option>
                         <option value="headphone_jack">耳机</option>
@@ -85,6 +107,7 @@ function sydney_slider_template() {
                     </select>
                     <input type="submit" Value="查看价格">
                 </form>
+
 
 <!--                 <div id="dummy" style="float:left;width:20%">
                     <h2></h2>
