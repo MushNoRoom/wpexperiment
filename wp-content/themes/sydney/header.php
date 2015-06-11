@@ -55,8 +55,3 @@
 		</div>
 	</header><!-- #masthead -->
 	<div class="header-image"><div class="overlay"></div></div>
-
-
-	<div id="content" class="page-wrap">
-		<div class="container content-wrapper">
-			<div class="row">	
