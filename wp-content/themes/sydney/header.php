@@ -32,7 +32,7 @@
 
 	<?php sydney_slider_template(); ?>
 
-	<header id="masthead" class="site-header" role="banner">
+ 	<header id="masthead" class="site-header" role="banner">
 		<div class="header-wrap">
             <div class="container">
                 <div class="row">
@@ -53,10 +53,5 @@
 				</div>
 			</div>
 		</div>
-	</header><!-- #masthead -->
+	</header> <!-- #masthead -->
 	<div class="header-image"><div class="overlay"></div></div>
-
-
-	<div id="content" class="page-wrap">
-		<div class="container content-wrapper">
-			<div class="row">	

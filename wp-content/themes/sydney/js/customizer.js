@@ -89,11 +89,11 @@
 		} );
 	});	
 	//Footer widgets color
-	wp.customize('footer_widgets_color',function( value ) {
-		value.bind( function( newval ) {
-			$('#sidebar-footer,#sidebar-footer a,.footer-widgets .widget-title').css('color', newval );
-		} );
-	});	
+	// wp.customize('footer_widgets_color',function( value ) {
+	// 	value.bind( function( newval ) {
+	// 		$('#sidebar-footer,#sidebar-footer a,.footer-widgets .widget-title').css('color', newval );
+	// 	} );
+	// });	
 	//Footer background
 	wp.customize('footer_background',function( value ) {
 		value.bind( function( newval ) {

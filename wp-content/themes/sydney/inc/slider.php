@@ -69,6 +69,7 @@ function populateBrandList ($dbConnection) {
 }
 
 function populateIssueCategory ($dbConnection) {
+
     $categories = $dbConnection->get_results("select * from yxgissuecategory");
     $categoryArray = array();
     echo '<option value="-1" selected>选择故障类别</option>';
@@ -76,7 +77,28 @@ function populateIssueCategory ($dbConnection) {
         $categoryArray[] = array($category->ID, $category->CategoryName);
         echo '<option value="'.$category->ID.'">'.$category->CategoryName."</option>\n";
     }
+
+
     return $categoryArray;
+}
+
+function populateIssueDetails ($dbConnection) {
+    $issueArray = array();
+    $desc = "";
+    if(isset($_POST["select_brand"])){
+        $selectedBrandsId = $_POST["select_brand"];
+        // $desc = $selectedBrandsId;
+        if ($selectedBrand >= 0) {
+            $issueDetails = $dbConnection->get_results("select * from yxgissuedetails where BrandID = ".$selectedBrandsId." ORDER BY ModelID");
+            foreach ($issueDetails as $key => $issue) {
+                $desc = $issue->IssueDescription;
+                array_push($issueArray, array($issue->ID, $issue->ModelID, $issue->CategoryID, $issue->IssueDescription));
+            }
+        }
+    }
+    return $issueArray;
+    // return $issueArray;   
+    // return "select * from yxgissuedetails where BrandID= ".$selectedBrandsId." ORDER BY ModelID";
 }
 
 ?>
@@ -105,7 +127,7 @@ function sydney_slider_template() {
     ?>
 
     <div id="slideshow" class="header-slider">
-        <div class="slides-container">
+<!--         <div class="slides-container">
             <?php 
                 if ( get_theme_mod('slider_image_1', get_template_directory_uri() . '/images/1.png') ) {
                     echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_1', get_template_directory_uri() . '/images/1.jpg')) . ');"></div>';
@@ -124,27 +146,17 @@ function sydney_slider_template() {
                     echo '<div class="slide-item" style="background-image:url(' . esc_url(get_theme_mod('slider_image_5')) . ');"></div>';
                 }               
             ?>  
-        </div>
+        </div> -->
 
         <div class="text-slider-section">
             <div class="text-slider">
                 <ul class="slide-text slides">
-                    <?php if ( get_theme_mod('slider_image_1', get_template_directory_uri() . '/images/1.png') ) : ?>
                     <li>
                         <div class="contain">
                             <h2 class="maintitle"><?php echo esc_html(get_theme_mod('slider_title_1', 'Welcome to Sydney')); ?></h2>
                             <p class="subtitle"><?php echo esc_html(get_theme_mod('slider_subtitle_1','Feel free to look around')); ?></p>
                         </div>
-                    </li>
-                    <?php endif; ?>
-<!--                     <?php if ( get_theme_mod('slider_image_2', get_template_directory_uri() . '/images/2.jpg') ) : ?>
-                    <li>
-                        <div class="contain">
-                            <h2 class="maintitle"><?php echo esc_html(get_theme_mod('slider_title_2', 'Ready to begin your journey?')); ?></h2>
-                            <p class="subtitle"><?php echo esc_html(get_theme_mod('slider_subtitle_2', 'Click the button below')); ?></p>
-                        </div>
-                    </li> -->
-                    <?php endif; ?>                                       
+                    </li>                                   
                 </ul>
             </div>
 <!--             <?php $slider_button = get_theme_mod('slider_button_text', 'Click to begin'); ?>
@@ -206,35 +218,67 @@ function sydney_slider_template() {
                         <?php 
                             $categoryArray = populateIssueCategory($yxgDatabase);
                         ?>
-<!--                         <option value="screen">屏幕碎裂</option>
-                        <option value="battery">电池</option>
-                        <option value="headphone_jack">耳机</option>
-                        <option value="camera">相机</option>  
-                        <option value="bodyDamage">机身变形</option> -->
                     </select>
                     <script type="text/javascript">
                         var selectCategory = document.getElementById('issue_cat_selection');
+                        var selectIssue = document.getElementById('issue_detail_selection');
                         var categories = <?php echo json_encode($categoryArray) ?>;
                         selectCategory.onchange = function() {
                             removeSelectionIndicator(selectCategory);
                         }
                     </script>
-                    <select name="故障详情">
-                        <option value="issueDetails" selected>请选择故障详情</option>
+                    <select name="select_issue_detail" id="issue_detail_selection">
+                        <option value="-1">请选择故障详情</option>
+                        <?php $issueArray = populateIssueDetails($yxgDatabase) ?>
+                        <script type="text/javascript">
+                            var selectDetail = document.getElementById('issue_detail_selection');
+                            var selectCat = document.getElementById('issue_cat_selection');
+                            var selectedModel = document.getElementById('model_selection'); 
+                            var issues = JSON.parse('<?php echo json_encode($issueArray) ?>');
+                            selectCategory.onchange = function() {
+                                if (selectCat.options[selectCat.selectedIndex].value > 0)
+                                {
+                                    // removeSelectionIndicator(selectCategory);
+                                    // var hello = 0;
+                                    selectDetail.length = 0;
+                                    var option = document.createElement("option");
+                                    option.text = "请选择故障详情";
+                                    // var issueCount = issues.length;
+                                    // option.text = "hi"+issueCount;
+                                    selectDetail.add(option, -1);
+                                    var i;
+                                    var text = "";
+                                    for (i = 0; i < issues.length; i++) {
+                                        // text += selectedModel.options[selectedModel.selectedIndex].value + "<br>";
+                                        // text += issues[i][1] + issues[i][3] + "<br>";
+                                        if (issues[i][2] == selectCat.options[selectCat.selectedIndex].value && issues[i][1] == selectedModel.options[selectedModel.selectedIndex].value)
+                                        {
+                                            
+                                            option = document.createElement("option");
+                                            option.text = issues[i][3];
+                                            selectDetail.add(option, issues[i][0]);   
+                                        }
+                                    }
+                                }
+                                // for (i = 0; i < issues.length, ++i) {
+                                //         var option = document.createElement("option");
+                                //         option.text = "nima";
+                                //         selectDetail.add(option, i); 
+                                //     // if (issues[i][2] == selectCat.options[selectCat.selectedIndex].value && 
+                                //     //     issues[i][1] == selectedModel.options[selectedModel.selectedIndex].value)
+                                //     // {
+                                //     //     option = document.createElement("option");
+                                //     //     option.text = issues[i][3];
+                                //     //     selectDetail.add(option, issues[i][0]);   
+                                //     // }
+                                // }
+                                // document.getElementById("exp").innerHTML = text; 
+                            }
+                        </script>
                     </select>
-                    <input type="submit" Value="查看价格">
+                    <input type="submit" Value="查看报价">
                 </form>
                 <p id="exp"></p>
-
-<!--                 <div id="dummy" style="float:left;width:20%">
-                    <h2></h2>
-                </div>
-                <div id="main_widget_area" class="front-paget-widget-area" style="float:left">
-                    <?php dynamic_sidebar('mywidgetarea-1'); ?>
-                </div>
-                <div id="issue_select_area" class="front-page-issue-select-area" style="float:left">
-                    <?php dynamic_sidebar('mywidgetarea-2'); ?>
-                </div> -->
             </div>
         </div>
 
