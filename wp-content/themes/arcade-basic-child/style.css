@@ -1,0 +1,53 @@
+/*!
+Theme Name: Arcade Basic Child
+Theme URI: 
+Description: Modified on top of Arcade Basic
+Author: c.bavota
+Author URI:
+Template: arcade-basic
+Tags: black, blue, gray, silver, white, light, one-column, two-columns, left-sidebar, right-sidebar, fluid-layout, responsive-layout, buddypress, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, flexible-header, microformats, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
+Text Domain: arcade-basic-child
+License: GNU General Public License v3.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
+*/
+
+#more-site {
+  margin-top: 50px;
+  border: 1px solid #fff;
+  color: #fff;
+  font-weight: normal;
+  padding: 10px 25px;
+  display: none;
+  background: transparent; }
+  #more-site:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: #fff;
+    color: #fff; }
+  .only-on-home #more-site {
+    display: inline-block; }
+  @media (max-width: 1200px) {
+    #more-site {
+      display: none; } }
+
+  input[type="submit"] {
+        position: relative;
+        display: inline-block;
+        font-family: "Raleway", sans-serif;
+        font-size: 13px;
+        line-height: 24px;
+        font-weight: 700;
+        padding: 12px 34px;
+        color: #ffffff;
+        background-color: #FF7070;
+        text-transform: uppercase;
+        -webkit-border-radius: 3px;
+           -moz-border-radius: 3px;
+             -o-border-radius: 3px;
+                border-radius: 3px;
+        -webkit-transition: all 0.3s;
+           -moz-transition: all 0.3s;
+            -ms-transition: all 0.3s;
+             -o-transition: all 0.3s;
+                transition: all 0.3s;
+    }
+
