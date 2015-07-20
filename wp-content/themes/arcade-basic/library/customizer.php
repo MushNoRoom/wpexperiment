@@ -201,6 +201,7 @@ class Bavotasan_Customizer {
 			'col-md-8' => '66%',
 			'col-md-9' => '75%',
 			'col-md-10' => '83%',
+			'col-md-12' => '100%'
 		);
 
 		$wp_customize->add_setting( 'primary', array(

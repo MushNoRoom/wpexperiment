@@ -6,7 +6,7 @@
  *
  * @since 1.0.0
  */
-$bavotasan_theme_options = bavotasan_theme_options();
+// $bavotasan_theme_options = bavotasan_theme_options();
 ?>
 	</main><!-- main -->
 

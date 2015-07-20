@@ -4655,16 +4655,21 @@ iframe {
 -------------------------------------------------------------- */
 #secondary,
 #tertiary {
-  margin: 50px 0; }
+  margin: 50px 0; 
+  display:inline;
+  float:none;}
   @media (max-width: 480px) {
     #secondary,
     #tertiary {
       margin-top: 0; } }
 
 .widget {
-  width: 100%;
+  width: 50%;
   font-size: 90%;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  margin-left:auto;
+  margin-right: auto; 
+  display:inline-block;}
   .widget .search-form label,
   .widget .search-field {
     width: 100%; }
